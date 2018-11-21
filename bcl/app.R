@@ -56,7 +56,7 @@ server <- function(input, output) {
   })
   
   output$coolplot <- renderPlot({
-    if (is.null(filtered()) | nrow(filtered()) == 0) {
+    if (is.null(filtered())) {
       return()
     }
     
