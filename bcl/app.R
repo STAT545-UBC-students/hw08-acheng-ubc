@@ -18,7 +18,8 @@ ui <- fluidPage(
       radioButtons("typeInput", "Product type",
                   choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
                   selected = "WINE"),
-      uiOutput("countryOutput")
+      uiOutput("countryOutput"),
+      checkboxInput("pricesortInput", "Sort by Lowest Price")
     ),
     
     mainPanel(
@@ -50,6 +51,10 @@ server <- function(input, output) {
     
     if (nrow(res) == 0) {
       return(NULL)
+    }
+    
+    if (input$pricesortInput) {
+      return(res %>% arrange(Price))
     }
     
     return(res)
