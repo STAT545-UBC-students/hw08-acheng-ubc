@@ -25,6 +25,7 @@ ui <- fluidPage(
     mainPanel(
       plotOutput("coolplot"),
       br(), br(),
+      textOutput("numResults"),
       tableOutput("results")
     )
   )
@@ -36,6 +37,14 @@ server <- function(input, output) {
                 sort(unique(bcl$Country)),
                 selected = "CANADA")
   })  
+  
+  output$numResults <- renderText({
+    if (is.null(filtered())){
+      "We found 0 items matching your selections :("
+    }
+    paste("We found ", nrow(filtered()), " items matching your selections.")
+  })
+
   
   filtered <- reactive({
     if (is.null(input$countryInput)) {

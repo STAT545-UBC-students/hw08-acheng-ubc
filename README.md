@@ -9,3 +9,4 @@ The code and data are from [Dean Attali's tutorial](https://deanattali.com/blog/
 1. Added BC Liquor Store logo on title panel
 1. Tables and Plots do not render if Filtered Data has no results
 1. Added option to sort Price Table in ascending order by price
+1. Added text stating how many results were found
