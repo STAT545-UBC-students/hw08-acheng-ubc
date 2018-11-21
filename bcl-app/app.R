@@ -42,11 +42,9 @@ server <- function(input, output) {
   output$numResults <- renderText({
     if (is.null(filtered())){
       "We found 0 items matching your selections :("
+    } else {
+      paste("We found ", nrow(filtered()), " items matching your selections.")
     }
-    if (nrow(filtered()) == 0){
-      "We found 0 items matching your selections :("
-    }
-    paste("We found ", nrow(filtered()), " items matching your selections.")
   })
 
   
