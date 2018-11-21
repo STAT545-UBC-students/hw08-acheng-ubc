@@ -11,6 +11,7 @@ ui <- fluidPage(
       br(),
       "BC Liquor Store Prices")
     ),
+  
   sidebarLayout(
     sidebarPanel(
       sliderInput("priceInput", "Price", 0, 100, c(25, 40), pre = "$"),
@@ -19,6 +20,7 @@ ui <- fluidPage(
                   selected = "WINE"),
       uiOutput("countryOutput")
     ),
+    
     mainPanel(
       plotOutput("coolplot"),
       br(), br(),
@@ -39,23 +41,33 @@ server <- function(input, output) {
       return(NULL)
     }    
     
-    bcl %>%
+    res <- bcl %>%
       filter(Price >= input$priceInput[1],
              Price <= input$priceInput[2],
              Type == input$typeInput,
              Country == input$countryInput
       )
+    
+    if (nrow(res) == 0) {
+      return(NULL)
+    }
+    
+    return(res)
   })
   
   output$coolplot <- renderPlot({
     if (is.null(filtered())) {
       return()
     }
+    
     ggplot(filtered(), aes(Alcohol_Content)) +
       geom_histogram()
   })
 
   output$results <- renderTable({
+    if (is.null(filtered())) {
+      return()
+    }
     filtered()
   })
 }

@@ -7,5 +7,5 @@ The code and data are from [Dean Attali's tutorial](https://deanattali.com/blog/
 
 # Elements added to the Shiny app
 1. BC Liquor Store logo on title panel
-1.
+1. Tables and Plots do not render if Filtered Data has no results
 1.
